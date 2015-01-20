@@ -14,3 +14,8 @@ The tutorial is on a different version of xcode which makes following it somewha
 
 
 Walkthrough of all user stories:
+
+
+![Video Walkthrough](tipCalcGif.gif)
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
