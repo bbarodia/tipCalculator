@@ -13,8 +13,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *billTextField;
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *threePersonDivision;
+@property (weak, nonatomic) IBOutlet UILabel *fourPersonDivision;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipControl;
 - (IBAction)onTap:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *resultView;
+@property (weak, nonatomic) IBOutlet UILabel *twoPersonDivision;
 - (void) updateValues;
 - (void) onSettingsButton;
 
@@ -36,7 +40,7 @@
     [super viewDidLoad];
     [self updateValues];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
-
+    [self.resultView setHidden:YES];
 
     // Do any additional setup after loading the view from its nib.
 }
@@ -58,7 +62,12 @@
 
 - (IBAction)onTap:(id)sender {
     
+    [UIView animateWithDuration:4.0 animations:^{
+        [self.tipControl setHidden:NO];
+    }];
     [self.view endEditing:YES];
+    [self.resultView setHidden:NO];
+
     [self updateValues];
 }
 
@@ -74,13 +83,18 @@
     float billAmount = [self.billTextField.text floatValue];
     NSArray *tipValues = @[@(0.1), @(0.15), @(0.20)];
     float tipAmount = billAmount * [tipValues[self.tipControl.selectedSegmentIndex] floatValue];
-    
+
     float totalAmount = tipAmount + billAmount;
-    
+
     self.tipLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
     
     self.totalLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
     
+    self.twoPersonDivision.text = [NSString stringWithFormat:@"$%0.2f", totalAmount/2];
+    
+    self.threePersonDivision.text = [NSString stringWithFormat:@"$%0.2f", totalAmount/3];
+    
+    self.fourPersonDivision.text = [NSString stringWithFormat:@"$%0.2f", totalAmount/4];
 }
 
 
