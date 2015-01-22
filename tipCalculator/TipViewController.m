@@ -63,6 +63,14 @@
 }
 
 - (void) updateValues {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *defaultTipPercent = [defaults objectForKey:@"defaultTipPercent"];
+
+    if ( defaultTipPercent.length > 0 ) {
+        NSLog(@"value exists");
+    }
+    
     float billAmount = [self.billTextField.text floatValue];
     NSArray *tipValues = @[@(0.1), @(0.15), @(0.20)];
     float tipAmount = billAmount * [tipValues[self.tipControl.selectedSegmentIndex] floatValue];
